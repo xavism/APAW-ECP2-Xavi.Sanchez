@@ -73,7 +73,17 @@ public class Dispatcher {
     }
 
     public void doDelete(HttpRequest request, HttpResponse response) {
-        responseError(response, new RequestInvalidException(request.getPath()));
+    		try {
+    			if (request.isEqualsPath(AccountResource.ACCOUNT + AccountResource.ID)) {
+    				//String accountId = request.getBody().split(":")[0];
+    				response.setStatus(HttpStatus.OK);
+            }
+    			else {
+    		        responseError(response, new RequestInvalidException(request.getPath()));
+    			}
+    		} catch(Exception e) {
+    			
+    		}
     }
 
 }

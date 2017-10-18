@@ -39,5 +39,12 @@ public class AccountResourceFunctionalTesting {
 	        assertEquals("{\"id\":1,\"active\":\"false\"}", new HttpClientService().httpRequest(request).getBody());
 
 	    }
+	    
+	    @Test
+	    public void testDeleteAccount() {
+	        HttpRequest request = new HttpRequestBuilder().method(HttpMethod.DELETE).path(AccountResource.ACCOUNT).path(AccountResource.ID)
+	                .expandPath("1").build();
+	        new HttpClientService().httpRequest(request);
+	    }
 
 }
