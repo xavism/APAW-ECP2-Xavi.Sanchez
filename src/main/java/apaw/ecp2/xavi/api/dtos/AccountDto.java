@@ -1,35 +1,24 @@
-package apaw.ecp2.xavi.api.entities;
+package apaw.ecp2.xavi.api.dtos;
 
 
 import java.util.Calendar;
 
-public class Account {
+import apaw.ecp2.xavi.api.entities.Account;
+
+public class AccountDto {
 	
 	private int id;
 	private Calendar opened;
 	private double factor;
 	private boolean active;
 	
-	public Account() {
-		
-	}
+	public AccountDto(Account account) {
+        id = account.getId();
+        opened = account.getOpened();
+        factor = account.getFactor();
+        active = account.getActive();
+    }
 	
-	public Account(int id) {
-		assert id > 0;
-		this.id = id;
-	}
-	
-	public Account(int id, Calendar opened, double factor, boolean active) {
-		assert id > 0;
-		assert opened != null;
-		assert factor > 0;
-		assert opened != null;
-
-		this.id = id;
-		this.opened = opened;
-		this.factor = factor;
-		this.active = active;
-	}
 
 	public Integer getId() {
 		return this.id;

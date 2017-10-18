@@ -7,7 +7,8 @@ import org.junit.runners.Suite.SuiteClasses;
 @RunWith(Suite.class)
 @SuiteClasses({
     ThemeControllerIT.class, 
-    VoteControllerIT.class
+    VoteControllerIT.class,
+    AccountControllerIT.class
 })
 public class AllThemeApiControllersTests {
 

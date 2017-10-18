@@ -7,7 +7,8 @@ import org.junit.runners.Suite.SuiteClasses;
 @RunWith(Suite.class)
 @SuiteClasses({
     ThemeDaoMemoryTest.class,
-    VoteDaoMemoryTest.class
+    VoteDaoMemoryTest.class,
+    AccountDaoMemoryTest.class
 })
 public class AllThemeApiDaosMemoryTests {
 
