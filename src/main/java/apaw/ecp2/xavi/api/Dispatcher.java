@@ -1,5 +1,6 @@
 package apaw.ecp2.xavi.api;
 
+import apaw.ecp2.xavi.api.resources.AccountResource;
 import apaw.ecp2.xavi.api.resources.ThemeResource;
 import apaw.ecp2.xavi.api.resources.VoteResource;
 import apaw.ecp2.xavi.api.resources.exceptions.RequestInvalidException;
@@ -47,6 +48,8 @@ public class Dispatcher {
                 String themeId = request.getBody().split(":")[0]; // body="themeId:vote"
                 String vote = request.getBody().split(":")[1];
                 voteResource.createVote(Integer.valueOf(themeId), Integer.valueOf(vote));
+                response.setStatus(HttpStatus.CREATED);
+            } else if (request.isEqualsPath(AccountResource.ACCOUNT)) {
                 response.setStatus(HttpStatus.CREATED);
             } else {
                 throw new RequestInvalidException(request.getPath());
