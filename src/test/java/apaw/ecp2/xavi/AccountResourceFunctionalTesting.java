@@ -1,6 +1,8 @@
 package apaw.ecp2.xavi;
 
 
+import static org.junit.Assert.*;
+
 import org.junit.Before;
 import org.junit.Test;
 
@@ -27,6 +29,15 @@ public class AccountResourceFunctionalTesting {
 	    @Test
 	    public void testCreateAccount() {
 	        this.createAccount();
+	    }
+	    
+	    @Test
+	    public void testReadAccount() {
+	        this.createAccount();
+	        HttpRequest request = new HttpRequestBuilder().method(HttpMethod.GET).path(AccountResource.ACCOUNT).path(AccountResource.ID)
+	                .expandPath("1").build();
+	        assertEquals("{\"id\":1,\"active\":\"false\"}", new HttpClientService().httpRequest(request).getBody());
+
 	    }
 
 }

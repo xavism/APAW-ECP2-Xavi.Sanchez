@@ -6,6 +6,7 @@ import apaw.ecp2.xavi.api.entities.Account;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class AccountController {
 	
@@ -22,6 +23,19 @@ public class AccountController {
 	
 	public void createAccount() {
 		DaoFactory.getFactory().getAccountDao().create(new Account(ID+1));
+		System.out.println(ID);
 		ID++;
     }
+	
+	private boolean existAccountId(int accountId) {
+        return DaoFactory.getFactory().getAccountDao().read(accountId) != null;
+    }
+	
+	public Optional<AccountDto> readAccount(int accountId) {
+	       if (existAccountId(accountId)) {
+	            return Optional.of(new AccountDto(DaoFactory.getFactory().getAccountDao().read(accountId)));
+	        } else {
+	            return Optional.empty();
+	        }
+	    }
 }
