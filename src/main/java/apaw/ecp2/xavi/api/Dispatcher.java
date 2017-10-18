@@ -13,6 +13,8 @@ public class Dispatcher {
     private ThemeResource themeResource = new ThemeResource();
 
     private VoteResource voteResource = new VoteResource();
+    
+    private AccountResource accountResource = new AccountResource();
 
     private void responseError(HttpResponse response, Exception e) {
         response.setBody("{\"error\":\"" + e + "\"}");
@@ -31,6 +33,8 @@ public class Dispatcher {
                 response.setBody(themeResource.themeVoteList(Integer.valueOf(request.paths()[1])).toString());
             } else if (request.isEqualsPath(VoteResource.VOTES)) {
                 response.setBody(voteResource.voteList().toString());
+            } else if (request.isEqualsPath(AccountResource.ACCOUNT + AccountResource.ID)) {
+                response.setBody(accountResource.readAccount(Integer.valueOf(request.paths()[1])).toString());
             } else {
                 throw new RequestInvalidException(request.getPath());
             }
@@ -50,6 +54,7 @@ public class Dispatcher {
                 voteResource.createVote(Integer.valueOf(themeId), Integer.valueOf(vote));
                 response.setStatus(HttpStatus.CREATED);
             } else if (request.isEqualsPath(AccountResource.ACCOUNT)) {
+            		accountResource.createAccount();
                 response.setStatus(HttpStatus.CREATED);
             } else {
                 throw new RequestInvalidException(request.getPath());
