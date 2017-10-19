@@ -44,10 +44,10 @@ public class AccountController {
     }
 	
 	public Optional<AccountDto> readAccount(int accountId) {
-	       if (existAccountId(accountId)) {
-	            return Optional.of(new AccountDto(DaoFactory.getFactory().getAccountDao().read(accountId)));
-	        } else {
-	            return Optional.empty();
-	        }
-	    }
+       if (existAccountId(accountId)) {
+            return Optional.of(new AccountDto(DaoFactory.getFactory().getAccountDao().read(accountId)));
+        } else {
+            return Optional.empty();
+        }
+    }
 }

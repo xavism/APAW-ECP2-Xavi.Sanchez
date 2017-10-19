@@ -26,6 +26,11 @@ public class AccountControllerIT {
         assertEquals(2, accountController.AccountList().size());
     }
     
+    @Test 
+    public void testRead() {
+    		assertSame(1, accountController.readAccount(1).get().getId());
+    }
+    
     @Test
     public void testDelete() {
         assertEquals(1, accountController.AccountList().size());

@@ -1,6 +1,7 @@
 package apaw.ecp2.xavi.api;
 
 import apaw.ecp2.xavi.api.dtos.AccountDto;
+import apaw.ecp2.xavi.api.dtos.CustomerDto;
 import apaw.ecp2.xavi.api.resources.AccountResource;
 import apaw.ecp2.xavi.api.resources.CustomerResource;
 import apaw.ecp2.xavi.api.resources.ThemeResource;
@@ -39,6 +40,8 @@ public class Dispatcher {
                 response.setBody(voteResource.voteList().toString());
             } else if (request.isEqualsPath(AccountResource.ACCOUNT + AccountResource.ID)) {
                 response.setBody(accountResource.readAccount(Integer.valueOf(request.paths()[1])).toString());
+            } else if (request.isEqualsPath(CustomerResource.CUSTOMER + CustomerResource.ID)) {
+                response.setBody(customerResource.readCustomer(Integer.valueOf(request.paths()[1])).toString());
             } else {
                 throw new RequestInvalidException(request.getPath());
             }
@@ -61,7 +64,8 @@ public class Dispatcher {
             		accountResource.createAccount();
                 response.setStatus(HttpStatus.CREATED);
             } else if (request.isEqualsPath(CustomerResource.CUSTOMER)) {
-            		customerResource.createCustomer();
+            		String customerName = request.getBody().split(":")[0];
+            		customerResource.createCustomer(customerName);
                 response.setStatus(HttpStatus.CREATED);
             } else {
                 throw new RequestInvalidException(request.getPath());
@@ -85,8 +89,11 @@ public class Dispatcher {
     				String accountId = request.paths()[1];
     				AccountDto dto = accountResource.deleteAccount(Integer.valueOf(accountId));
     				response.setBody(dto.toString());
-            }
-    			else {
+            } else if (request.isEqualsPath(CustomerResource.CUSTOMER + CustomerResource.ID)) {
+				String customerId = request.paths()[1];
+				CustomerDto dto = customerResource.deleteCustomer(Integer.valueOf(customerId));
+				response.setBody(dto.toString());
+            } else {
     		        responseError(response, new RequestInvalidException(request.getPath()));
     			}
     		} catch(Exception e) {
