@@ -1,6 +1,7 @@
 package apaw.ecp2.xavi.api.daos.memory;
 
 import apaw.ecp2.xavi.api.daos.AccountDao;
+import apaw.ecp2.xavi.api.daos.CustomerDao;
 import apaw.ecp2.xavi.api.daos.DaoFactory;
 import apaw.ecp2.xavi.api.daos.ThemeDao;
 import apaw.ecp2.xavi.api.daos.VoteDao;
@@ -12,6 +13,8 @@ public class DaoMemoryFactory extends DaoFactory {
     private VoteDao voteDao;
     
     private AccountDao accountDao;
+    
+    private CustomerDao customerDao;
 
     @Override
     public ThemeDao getThemeDao() {
@@ -35,6 +38,14 @@ public class DaoMemoryFactory extends DaoFactory {
             voteDao = new VoteDaoMemory();
         }
         return voteDao;
+    }
+    
+    @Override
+    public CustomerDao getCustomerDao() {
+        if (customerDao == null) {
+        		customerDao = new CustomerDaoMemory();
+        }
+        return customerDao;
     }
 
 }

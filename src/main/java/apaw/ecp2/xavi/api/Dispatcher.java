@@ -2,6 +2,7 @@ package apaw.ecp2.xavi.api;
 
 import apaw.ecp2.xavi.api.dtos.AccountDto;
 import apaw.ecp2.xavi.api.resources.AccountResource;
+import apaw.ecp2.xavi.api.resources.CustomerResource;
 import apaw.ecp2.xavi.api.resources.ThemeResource;
 import apaw.ecp2.xavi.api.resources.VoteResource;
 import apaw.ecp2.xavi.api.resources.exceptions.RequestInvalidException;
@@ -16,6 +17,8 @@ public class Dispatcher {
     private VoteResource voteResource = new VoteResource();
     
     private AccountResource accountResource = new AccountResource();
+    
+    private CustomerResource customerResource = new CustomerResource();
 
     private void responseError(HttpResponse response, Exception e) {
         response.setBody("{\"error\":\"" + e + "\"}");
@@ -56,6 +59,9 @@ public class Dispatcher {
                 response.setStatus(HttpStatus.CREATED);
             } else if (request.isEqualsPath(AccountResource.ACCOUNT)) {
             		accountResource.createAccount();
+                response.setStatus(HttpStatus.CREATED);
+            } else if (request.isEqualsPath(CustomerResource.CUSTOMER)) {
+            		customerResource.createCustomer();
                 response.setStatus(HttpStatus.CREATED);
             } else {
                 throw new RequestInvalidException(request.getPath());
