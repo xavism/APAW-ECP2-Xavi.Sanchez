@@ -1,5 +1,6 @@
 package apaw.ecp2.xavi.api;
 
+import apaw.ecp2.xavi.api.dtos.AccountDto;
 import apaw.ecp2.xavi.api.resources.AccountResource;
 import apaw.ecp2.xavi.api.resources.ThemeResource;
 import apaw.ecp2.xavi.api.resources.VoteResource;
@@ -75,14 +76,15 @@ public class Dispatcher {
     public void doDelete(HttpRequest request, HttpResponse response) {
     		try {
     			if (request.isEqualsPath(AccountResource.ACCOUNT + AccountResource.ID)) {
-    				//String accountId = request.getBody().split(":")[0];
-    				response.setStatus(HttpStatus.OK);
+    				String accountId = request.paths()[1];
+    				AccountDto dto = accountResource.deleteAccount(Integer.valueOf(accountId));
+    				response.setBody(dto.toString());
             }
     			else {
     		        responseError(response, new RequestInvalidException(request.getPath()));
     			}
     		} catch(Exception e) {
-    			
+    			responseError(response, e);
     		}
     }
 

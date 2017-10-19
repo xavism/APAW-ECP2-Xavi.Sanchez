@@ -14,6 +14,11 @@ public class AccountResource {
         new AccountController().createAccount();
     }
 	
+	public AccountDto deleteAccount(int accountId) throws AccountIdNotFoundException {
+        Optional<AccountDto> optional = new AccountController().deleteAccount(accountId);
+        return optional.orElseThrow(() -> new AccountIdNotFoundException(Integer.toString(accountId)));
+    }
+	
 	public AccountDto readAccount(int accountId) throws AccountIdNotFoundException {
         Optional<AccountDto> optional = new AccountController().readAccount(accountId);
         return optional.orElseThrow(() -> new AccountIdNotFoundException(Integer.toString(accountId)));

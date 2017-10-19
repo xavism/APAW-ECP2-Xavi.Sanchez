@@ -1,5 +1,6 @@
 package apaw.ecp2.xavi.api.controllers;
 
+import apaw.ecp2.xavi.api.daos.AccountDao;
 import apaw.ecp2.xavi.api.daos.DaoFactory;
 import apaw.ecp2.xavi.api.dtos.AccountDto;
 import apaw.ecp2.xavi.api.entities.Account;
@@ -29,6 +30,17 @@ public class AccountController {
 	
 	private boolean existAccountId(int accountId) {
         return DaoFactory.getFactory().getAccountDao().read(accountId) != null;
+    }
+	
+	public Optional<AccountDto> deleteAccount(int accountId) {
+       if (existAccountId(accountId)) {
+    	   		AccountDao accountDao = DaoFactory.getFactory().getAccountDao();
+            Optional<AccountDto> getter =  Optional.of(new AccountDto(accountDao.read(accountId)));
+            accountDao.deleteById(accountId);
+            return getter;
+       } else {
+            return Optional.empty();
+        }
     }
 	
 	public Optional<AccountDto> readAccount(int accountId) {
