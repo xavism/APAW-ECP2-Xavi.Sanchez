@@ -25,5 +25,12 @@ public class AccountControllerIT {
     		accountController.createAccount();
         assertEquals(2, accountController.AccountList().size());
     }
+    
+    @Test
+    public void testDelete() {
+        assertEquals(1, accountController.AccountList().size());
+        assertSame(1, accountController.deleteAccount(1).get().getId());
+        assertEquals(0, accountController.AccountList().size());
+    }
 
 }

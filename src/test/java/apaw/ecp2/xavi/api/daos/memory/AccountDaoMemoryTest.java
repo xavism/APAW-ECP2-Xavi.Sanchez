@@ -1,6 +1,8 @@
 package apaw.ecp2.xavi.api.daos.memory;
 
 
+import static org.junit.Assert.*;
+
 import org.junit.Before;
 import org.junit.Test;
 
@@ -14,13 +16,18 @@ public class AccountDaoMemoryTest {
     @Before
     public void before() {
         DaoFactory.setFactory(new DaoMemoryFactory());
-        account = new Account();
+        account = new Account(1);
         DaoFactory.getFactory().getAccountDao().create(account);
     }
     
-	@Test
-	public void test() {
-		
-	}
+    @Test
+    public void testReadAccount() {
+        assertSame(1, DaoFactory.getFactory().getAccountDao().read(1).getId());
+    }
+    
+    @Test
+    public void testReadNonExistId() {
+        assertNull(DaoFactory.getFactory().getAccountDao().read(2));
+    }
 
 }
