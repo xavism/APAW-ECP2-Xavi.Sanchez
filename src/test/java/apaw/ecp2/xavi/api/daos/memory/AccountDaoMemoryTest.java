@@ -29,5 +29,11 @@ public class AccountDaoMemoryTest {
     public void testReadNonExistId() {
         assertNull(DaoFactory.getFactory().getAccountDao().read(2));
     }
+    
+    @Test
+    public void testDelete() {
+    		DaoFactory.getFactory().getAccountDao().deleteById(1);
+        assertNull(DaoFactory.getFactory().getAccountDao().read(1));
+    }
 
 }

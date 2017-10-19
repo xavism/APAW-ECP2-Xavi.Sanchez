@@ -16,14 +16,26 @@ public class CustomerControllerIT {
     public void before() {
         DaoFactory.setFactory(new DaoMemoryFactory());
         customerController = new CustomerController();
-        customerController.createCustomer();
+        customerController.createCustomer("Xavier");
     }
 
     
     @Test
     public void testCreate() {
-    		customerController.createCustomer();
+    		customerController.createCustomer("Xavi");
         assertEquals(2, customerController.CustomerList().size());
     }
+    
+    @Test
+    public void testRead() {
+		assertSame("Xavier", customerController.readCustomer(1).get().getName());
+	}
+	
+	@Test
+	public void testDelete() {
+	    assertEquals(1, customerController.CustomerList().size());
+		assertEquals("Xavier", customerController.deleteCustomer(1).get().getName());
+	    assertEquals(0, customerController.CustomerList().size());
+	}
 
 }

@@ -7,7 +7,9 @@ import org.junit.runners.Suite.SuiteClasses;
 @RunWith(Suite.class)
 @SuiteClasses({
     ThemeResourceFunctionalTesting.class, 
-    VoteResourceFunctionalTesting.class
+    VoteResourceFunctionalTesting.class,
+    AccountResourceFunctionalTesting.class,
+    CustomerResourceFunctionalTesting.class
 })
 public class AllThemeFunctionalTestings {
 

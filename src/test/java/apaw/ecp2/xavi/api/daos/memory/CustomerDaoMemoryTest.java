@@ -20,4 +20,19 @@ public class CustomerDaoMemoryTest {
         DaoFactory.getFactory().getCustomerDao().create(customer);
     }
 
+    @Test
+    public void testReadCustomer() {
+        assertEquals("Xavi", DaoFactory.getFactory().getCustomerDao().read(1).getName());
+    }
+    
+    @Test
+    public void testReadNonExistId() {
+        assertNull(DaoFactory.getFactory().getCustomerDao().read(2));
+    }
+    
+    @Test
+    public void testDelete() {
+    		DaoFactory.getFactory().getCustomerDao().deleteById(1);
+        assertNull(DaoFactory.getFactory().getCustomerDao().read(1));
+    }
 }
